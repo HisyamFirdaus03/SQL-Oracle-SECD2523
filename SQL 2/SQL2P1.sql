@@ -138,6 +138,21 @@ ALTER TABLE sales_rep_addresses ADD CONSTRAINT sales_rep_add_sales_rep_fk FOREIG
 
 ALTER TABLE sales_representatives ADD CONSTRAINT sales_rep_sales_rep_fk FOREIGN KEY ( supervisor_id ) REFERENCES sales_representatives ( id );
 
+SELECT * FROM customers;
+SELECT * FROM price_history;
+
+SELECT * FROM customers NATURAL JOIN price_history;
+
+SELECT ctr_number "Customer Number" FROM customers WHERE CTR_NUMBER = 'c01986' ORDER BY "Customer Number";
+
+SELECT id, first_name, last_name, ADDRESS_LINE_1, ADDRESS_LINE_2, CITY, EMAIL, PHONE_NUMBER FROM sales_representatives NATURAL JOIN SALES_REP_ADDRESSES;
+SELECT id, first_name, last_name, ADDRESS_LINE_1, ADDRESS_LINE_2, CITY, EMAIL, PHONE_NUMBER FROM sales_representatives JOIN SALES_REP_ADDRESSES USING (id);
+SELECT * FROM items JOIN PRICE_HISTORY USING (itm_number);
+
+SELECT c.ctr_number, c.first_name, c.email, s.id, s.first_name, s.email, a.name FROM customers c JOIN SALES_REPRESENTATIVES s
+ON (c.SRE_ID = s.ID) JOIN teams a ON (a.id = c.TEM_ID) AND ctr_number = 'c00001';
+
+SELECT 'hello ' || CTR_NUMBER AS "Information" FROM customers;
 --CREATE OR REPLACE TRIGGER fkntm_orders BEFORE
     --UPDATE OF ctr_number ON orders
 --BEGIN
